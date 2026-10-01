@@ -144,16 +144,12 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
   they cover the EPAS early-pregnancy set, and they link to each other with
   relative links.
 - No further PDFs are waiting in `guidelines/`.
-- **Not yet a git repo.** Nothing is committed or pushed, and Pages isn't set up.
-- `gh` (GitHub CLI) isn't installed on the owner's Mac. To push, either
-  install it and authenticate (`brew install gh && gh auth login`) or have the
-  owner create an empty repo on github.com and provide the remote URL.
-- **Open decision: whether to publish the PDFs.** `miscarriage-management/`
-  holds its `guideline.pdf`. Newer source PDFs are in `guidelines/` under their
-  original names (e.g. `Pain and Bleeding in Early Pregnancy - Guideline.pdf`),
-  not copied into the tool folder. None are linked from the UI, but all would be
-  publicly downloadable if committed. Before the first commit, ask whether to
-  gitignore `*/guideline.pdf` and `guidelines/`.
+- **Published on GitHub Pages (01/10/2026)** at **https://rwhguides.github.io/**
+  from the public repo `rwhguides/rwhguides.github.io` (`main` branch, root).
+  See §8.
+- **PDFs are never published (owner decision):** `.gitignore` has `*.pdf`. Source
+  PDFs stay local only (`miscarriage-management/guideline.pdf` and
+  `guidelines/*.pdf`). Never force-add a PDF.
 - Local test server convention: `python3 -m http.server 8791` from the repo
   root (any free port works).
 
@@ -165,7 +161,8 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
 Tools/                          ← repo root = GitHub Pages site root
 ├── PROJECT_CONTEXT.md          ← this file
 ├── README.md                   ← human-facing overview + deploy steps
-├── .gitignore                  ← .DS_Store, .claude/
+├── .gitignore                  ← .DS_Store, .claude/, *.pdf
+├── .nojekyll                   ← tells Pages to serve files as-is (no Jekyll processing)
 ├── index.html                  ← hub homepage
 ├── styles.css                  ← homepage-only styles (tool grid/cards/status badges)
 ├── tools-manifest.js           ← window.TOOLS = [...] — the list of tools on the homepage
@@ -569,17 +566,27 @@ before marking it `live` or publishing.
 
 ---
 
-## 8. Deployment (when the owner is ready)
+## 8. Deployment (live since 01/10/2026)
 
-1. `git init` in `Tools/`, settle the open PDF question (§2), then make the first commit.
-2. Create the GitHub repo (e.g. `rwh-clinical-guidelines`) via `gh repo create`
-   or via the owner on github.com, then add the remote and push `main`.
-3. In GitHub: **Settings → Pages → Deploy from branch → `main` / root**.
-4. The site appears at `https://<username>.github.io/<repo>/`. Tools are at
-   `…/<repo>/<slug>/`.
-
-Commit and push only when the owner asks. `.claude/` is gitignored on purpose
-(it holds local Claude Code settings).
+- **GitHub account:** `rwhguides`. **Repo:** `rwhguides/rwhguides.github.io`
+  (public; free-plan Pages requires public). **Site:** https://rwhguides.github.io/,
+  tools at `https://rwhguides.github.io/<slug>/`.
+- Pages serves from `main` / root (GitHub enabled this automatically for the
+  `<user>.github.io` repo). Each push redeploys in about 1–2 minutes. Check with
+  `gh api repos/rwhguides/rwhguides.github.io/pages --jq .status` (wait for `built`).
+- `gh` is installed (Homebrew) and authenticated as `rwhguides` (HTTPS).
+- **Commit identity (repo-local config):** `rwhguides
+  <336302104+rwhguides@users.noreply.github.com>`. The owner chose this so their work
+  email (the global git identity) never appears in public history. Don't change it,
+  and don't commit from another clone without setting it the same way.
+- **To publish a change:** test locally first, bump `?v=` cache-busters, then
+  `git add -A && git commit && git push`, then check the live URL returns 200.
+- Commit and push only when the owner asks. `.claude/` is gitignored on purpose
+  (it holds local Claude Code settings). `PROJECT_CONTEXT.md`,
+  `NEW_TOOL_PROMPT.txt` and `README.md` are public by owner decision. Keep
+  secrets and personal contact details out of them.
+- All paths are relative, so moving to a custom domain or a `/repo/` subpath
+  would need no code changes.
 
 ---
 
