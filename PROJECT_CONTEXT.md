@@ -6,7 +6,7 @@
 > turning a new guideline into a tool. If this file and the code disagree, the
 > code is the source of truth. Point out the mismatch and offer to update this file.
 >
-> Last updated: 01/10/2026 (after tool #3, ectopic-pregnancy-management)
+> Last updated: 01/10/2026 (after tool #4, rhd-immunoglobulin)
 
 ---
 
@@ -136,13 +136,37 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
      patient sheet dates from July 2017, older than the guideline.
    - Interstitial/non-tubal ectopics → "Outside guideline scope", with Appendix A
      (multi-dose MTX + leucovorin) shown as reference only.
+9. **Fourth tool built and published (01/10/2026):** `rhd-immunoglobulin/`, from
+   *RhD Immunoglobulin (Anti D) Use in Maternity – Guideline* (RWH0191940 v3.0,
+   last review 14/09/2026, owner Sophie Cameron, Maternity Services / Maternity).
+   It has a new shape: an **indication + dose lookup** ("give / not required / not
+   listed / seek advice"), not a treatment choice. It covers routine antenatal
+   prophylaxis, sensitising events (<13 weeks and ≥13 weeks tables) and birth, with
+   gates for maternal group (RhD+, variant D, unknown) and antibodies (remnant
+   passive anti-D continues; unexplained anti-D or titre ≥16 → do not give). Owner
+   decisions:
+   - **TOP ≤10 weeks** and **light/isolated/painless bleeding <13 weeks** show
+     "Not listed as an indication in this guideline", with no recommendation either way.
+   - **FMH >6 mL:** show only the **minimum** extra dose (100 IU per mL over 6 mL,
+     rounded up to a whole IU), plus "number of injections/vials: confirm with blood
+     bank / haematologist". Never convert this to a vial count.
+   - **IM contraindicated** → Rhophylac 1500 IU IV only where the guideline says so
+     (≥13-week events, birth). For first-trimester events and routine doses →
+     "seek haematology advice".
+   - Coded conservatively: the multiple-pregnancy 625 IU applies to all
+     first-trimester events (the asterisk has no anchor in the table); the 6-weekly
+     repeat note shows from 12 weeks; FMH is required from 20+0 weeks.
+   - Patient info: *Fetal blood group testing (RHD NIPT)* PDF (Aug 2026). The "You and
+     Your Baby" brochure is intranet-only, so it's named but not linked.
+   - Not yet done (offered, awaiting the owner): link the "Anti-D" mentions in the
+     three early-pregnancy tools to this guideline.
 
 ### Current status (01/10/2026)
 
-- Three live tools: `miscarriage-management/`,
-  `pain-bleeding-early-pregnancy/` and `ectopic-pregnancy-management/`. Together
-  they cover the EPAS early-pregnancy set, and they link to each other with
-  relative links.
+- Four live tools: `miscarriage-management/`,
+  `pain-bleeding-early-pregnancy/`, `ectopic-pregnancy-management/` (the EPAS
+  early-pregnancy set, which link to each other with relative links) and
+  `rhd-immunoglobulin/` (Maternity).
 - No further PDFs are waiting in `guidelines/`.
 - **Published on GitHub Pages (01/10/2026)** at **https://rwhguides.github.io/**
   from the public repo `rwhguides/rwhguides.github.io` (`main` branch, root).
@@ -180,6 +204,9 @@ Tools/                          ← repo root = GitHub Pages site root
 ├── ectopic-pregnancy-management/ ← tool #3 (treatment choice + dose calculator)
 │   ├── index.html
 │   └── app.js                  ← ~1000 lines; no styles.css
+├── rhd-immunoglobulin/         ← tool #4 (indication + dose lookup)
+│   ├── index.html
+│   └── app.js                  ← ~900 lines; no styles.css
 └── _template/                  ← copy this to start a new tool
     ├── README.md               ← short human walkthrough
     ├── index.html              ← placeholder shell ([Guideline Title], RWH-XXXXXXX, etc.)
@@ -200,8 +227,8 @@ Architectural decisions (keep to these unless the owner asks otherwise):
 - **Cache-busting query strings:** `app.js?v=N`, `shared.css?v=N`. Bump `N`
   when you change a file, so browsers (and the owner testing locally) don't
   serve stale copies. Current versions: miscarriage `app.js?v=5`,
-  pain-bleeding `app.js?v=3`, ectopic `app.js?v=2`, homepage
-  `tools-manifest.js?v=4`. **Bump the
+  pain-bleeding `app.js?v=3`, ectopic `app.js?v=2`, RhD `app.js?v=1`,
+  homepage `tools-manifest.js?v=6`. **Bump the
   homepage's `tools-manifest.js?v=` whenever you edit the manifest.**
 - **Folder name = URL slug** = manifest `slug`/`path`, in kebab-case (e.g.
   `postpartum-haemorrhage/`).
@@ -392,6 +419,28 @@ The newest treatment-choice build. Prefer it over the miscarriage file as a mode
   tables underneath for print. **For any calculator, cross-check it against the
   guideline's own tables in `node` before building**, which is how the
   Mosteller/DuBois mismatch was found.
+
+### Additional patterns in `rhd-immunoglobulin/app.js` (copy as needed)
+Model for **"is it indicated, and at what dose?"** lookup guidelines:
+
+- **`computeResult()`** returns one object, `{verdict, title, doses[], banners[],
+  vf, rhophylac, prescriber}`, built from `state`. `screenResult()` only renders it.
+  Keep all the rules in that one function so they can be checked line by line
+  against the guideline. Verdicts: `give` / `notRequired` / `notListed` / `advice`.
+- **The title is the answer:** e.g. "Give 625 IU Rh(D) Immunoglobulin-VF IM". The
+  green "Prescribe and give" `actionPanel` lists each dose line, plus who may prescribe.
+- **Data-driven stop screens:** a `STOPS` map of `[kind, title, heading, items]`
+  rendered by a single `screenStop(key)`, used for gates that end the pathway.
+- **Event lists as data with flags** (`bleeding`, `notListed`), and the list shown
+  depends on gestation (<13 weeks vs ≥13 weeks). Options a guideline does *not*
+  list are offered explicitly and lead to a "Not listed" result, so the clinician
+  isn't left guessing.
+- **Thresholds as named constants** at the top (`FMH_COVERED_ML`,
+  `HOURS_STANDARD`, etc.), each with a § comment.
+- **Fields that only show when relevant** (e.g. the FMH input from 20 weeks; dose
+  questions hidden when the infant is RhD negative). Validation only covers fields
+  that are shown.
+- **Floating-point care in dose maths:** round to 3 dp before `Math.ceil`.
 
 ### Typical flow shape (copy this for new guidelines)
 1. **Intro:** a "Before you start" banner listing assumptions (e.g. diagnosis

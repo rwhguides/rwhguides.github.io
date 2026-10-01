@@ -40,6 +40,17 @@ window.TOOLS = [
     department: "Early Pregnancy Assessment Service (EPAS)",
     status: "live", // "live" | "draft" | "planned"
     path: "ectopic-pregnancy-management/"
+  },
+  {
+    slug: "rhd-immunoglobulin",
+    title: "RhD Immunoglobulin (Anti-D)",
+    description: "Whether RhD-Ig is indicated, and the dose, product, route, FMH testing and checks, for routine prophylaxis, sensitising events and birth.",
+    guidelineTitle: "RhD Immunoglobulin (Anti D) Use in Maternity – Guideline",
+    guidelineRef: "RWH0191940 v3.0",
+    lastUpdated: "14/09/2026",
+    department: "Maternity Services",
+    status: "live", // "live" | "draft" | "planned"
+    path: "rhd-immunoglobulin/"
   }
 
   // Example entry for the next tool:
