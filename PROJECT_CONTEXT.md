@@ -575,6 +575,14 @@ before marking it `live` or publishing.
   `<user>.github.io` repo). Each push redeploys in about 1–2 minutes. Check with
   `gh api repos/rwhguides/rwhguides.github.io/pages --jq .status` (wait for `built`).
 - `gh` is installed (Homebrew) and authenticated as `rwhguides` (HTTPS).
+- **Credential gotcha:** the Mac keychain also holds a login for a *different*
+  GitHub account (`geedigit`), and plain `git push` picked that one and got 403.
+  Fixed with a **repo-local** credential helper, so this repo pushes as `rwhguides`
+  and nothing global changed:
+  `git config --local credential.https://github.com.helper ""` then
+  `git config --local --add credential.https://github.com.helper '!gh auth git-credential'`.
+  Don't run `gh auth setup-git` globally: that would switch the owner's other
+  projects to `rwhguides` too.
 - **Commit identity (repo-local config):** `rwhguides
   <336302104+rwhguides@users.noreply.github.com>`. The owner chose this so their work
   email (the global git identity) never appears in public history. Don't change it,
