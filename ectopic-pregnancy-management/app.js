@@ -15,6 +15,13 @@
   const backBtn = document.getElementById("backBtn");
   const restartBtn = document.getElementById("restartBtn");
 
+  // Link to the sibling RhD Immunoglobulin (Anti-D) guideline. Opens in a new tab
+  // so the clinician's place in this pathway (held in memory only) isn't lost.
+  const ANTI_D_HREF = "../rhd-immunoglobulin/index.html";
+  function antiDLink(text) {
+    return `<a href="${ANTI_D_HREF}" target="_blank" rel="noopener">${text}</a>`;
+  }
+
   // ---- shared content blocks -------------------------------------------------
 
   const PHASES = ["Safety checks", "Diagnosis", "Findings", "MTX criteria", "Preference", "Result"];
@@ -125,7 +132,7 @@
           "Obtain written informed consent",
           "Arrange date and time for surgery, including booking of Operating Theatre and inpatient bed",
           "Request/arrange pre-treatment bloods (β-hCG, group and hold, FBE)",
-          "Prescribe Anti-D for Rhesus negative women according to the Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline"
+          "Prescribe Anti-D for Rhesus negative women according to the " + antiDLink("Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline")
         ]],
         ["Before proceeding", false, [
           "Confirm the diagnosis on an accredited ultrasound (Appendix C) where possible. When clinical suspicion is high and the woman is haemodynamically unstable, urgent surgery may be indicated without an accredited scan, in discussion with the Gynaecology consultant.",
@@ -177,7 +184,7 @@
         ["Treatment schedule", true, [
           "Explain treatment to the woman (and partner); provide the information booklet on ectopic pregnancy and contact details for EPAS and WEC; discuss methotrexate side effects",
           "Collect pre-treatment bloods (β-hCG, UEC, LFTs, FBE)",
-          "Prescribe Anti-D for Rhesus negative women according to the Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline",
+          "Prescribe Anti-D for Rhesus negative women according to the " + antiDLink("Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline"),
           "Obtain weight and height and calculate body surface area (Mosteller method) — see calculator below",
           "Obtain verbal informed consent, documented in the medical record",
           "Arrange admission onto ward 5 North for administration of methotrexate",
@@ -236,7 +243,7 @@
         ]],
         ["Management plan", true, [
           "Explain the plan to the woman (and partner) and provide written information, including EPAS and WEC contact details",
-          "Prescribe Anti-D for Rhesus negative women according to the Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline",
+          "Prescribe Anti-D for Rhesus negative women according to the " + antiDLink("Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline"),
           "Arrange follow-up on day 4 and day 7 (day 1 = day of diagnosis and treatment plan), in conjunction with EPAS. Refer to EPAS with the plan and next follow-up",
           WEEKEND_RULE,
           "Provide contact numbers / appointments for Women's Social Support Services / Pastoral Care &amp; Spirituality Services, as appropriate",
@@ -273,7 +280,7 @@
     "Ensure the woman participates in selecting the most appropriate treatment",
     "Clearly record plans for management and follow-up in the EPIC patient record",
     "Ectopic diagnosed in EPAS: escalate to the Acute Gynaecology registrar for review and plan (the EPAS HMO/junior registrar may initiate counselling, but all plans are discussed with the Acute Gynaecology registrar or consultant before being actioned)",
-    "Anti-D for Rhesus negative women, per the Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline",
+    "Anti-D for Rhesus negative women, per the " + antiDLink("Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline"),
     "Where the woman and her partner are particularly distressed, consider referral to a bereavement support worker; provide contact details for Women's Social Support Services or Pastoral Care and Spirituality Services"
   ];
 

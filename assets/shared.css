@@ -71,6 +71,10 @@ body {
   margin-bottom: 0.5rem;
 }
 .back-link:hover { opacity: 1; text-decoration: underline; }
+
+/* In-content links (e.g. links to sibling guidelines) — brand pink, not browser blue */
+.app-shell .card a:not(.patient-info-link) { color: var(--pink-dark); text-decoration: underline; text-underline-offset: 2px; }
+.app-shell .card a:not(.patient-info-link):hover { color: var(--pink); }
 .brand { display: flex; align-items: center; gap: 0.75rem; }
 .brand-dot {
   flex: none;

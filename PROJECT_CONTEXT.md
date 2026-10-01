@@ -158,8 +158,9 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
      repeat note shows from 12 weeks; FMH is required from 20+0 weeks.
    - Patient info: *Fetal blood group testing (RHD NIPT)* PDF (Aug 2026). The "You and
      Your Baby" brochure is intranet-only, so it's named but not linked.
-   - Not yet done (offered, awaiting the owner): link the "Anti-D" mentions in the
-     three early-pregnancy tools to this guideline.
+   - Afterwards (owner approved): every "Anti-D" mention in the three
+     early-pregnancy tools now links to this guideline via `antiDLink()`. This
+     added a site-wide in-content link style in `shared.css` (see §5).
 
 ### Current status (01/10/2026)
 
@@ -226,9 +227,10 @@ Architectural decisions (keep to these unless the owner asks otherwise):
   or a custom domain.
 - **Cache-busting query strings:** `app.js?v=N`, `shared.css?v=N`. Bump `N`
   when you change a file, so browsers (and the owner testing locally) don't
-  serve stale copies. Current versions: miscarriage `app.js?v=5`,
-  pain-bleeding `app.js?v=3`, ectopic `app.js?v=2`, RhD `app.js?v=1`,
-  homepage `tools-manifest.js?v=6`. **Bump the
+  serve stale copies. Current versions: pain-bleeding `app.js?v=4`, ectopic `app.js?v=3`, RhD `app.js?v=1`,
+  miscarriage `app.js?v=6`, homepage `tools-manifest.js?v=6`, and
+  `shared.css?v=2` on every page (bump it on **all** `index.html` files, including
+  `_template/`, whenever `shared.css` changes). **Bump the
   homepage's `tools-manifest.js?v=` whenever you edit the manifest.**
 - **Folder name = URL slug** = manifest `slug`/`path`, in kebab-case (e.g.
   `postpartum-haemorrhage/`).
@@ -391,6 +393,14 @@ Use this one as the model for **assessment/triage** guidelines:
   and cards.
 - **Linking sibling tools** with a relative link (e.g.
   `../miscarriage-management/index.html`) is fine. That's not a PDF link.
+  **Links inside a pathway open in a new tab** (`target="_blank" rel="noopener"`),
+  because state is in memory only and following a link in the same tab would lose the
+  clinician's place. The `antiDLink(text)` helper (defined right after the DOM
+  constants, *before* the data blocks, to avoid a `const` temporal dead zone) is the
+  model: it's used inside data strings that render via `innerHTML`. A link inside a
+  checkbox `<label>` follows the link without ticking the box. In-content links
+  are styled by `.app-shell .card a:not(.patient-info-link)` in `shared.css`
+  (`--pink-dark`, underlined), never browser blue.
 
 ### Additional patterns in `ectopic-pregnancy-management/app.js` (copy as needed)
 The newest treatment-choice build. Prefer it over the miscarriage file as a model:

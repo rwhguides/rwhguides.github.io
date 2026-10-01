@@ -15,6 +15,13 @@
   const backBtn = document.getElementById("backBtn");
   const restartBtn = document.getElementById("restartBtn");
 
+  // Link to the sibling RhD Immunoglobulin (Anti-D) guideline. Opens in a new tab
+  // so the clinician's place in this pathway (held in memory only) isn't lost.
+  const ANTI_D_HREF = "../rhd-immunoglobulin/index.html";
+  function antiDLink(text) {
+    return `<a href="${ANTI_D_HREF}" target="_blank" rel="noopener">${text}</a>`;
+  }
+
   // ---- shared content blocks -------------------------------------------------
 
   const PHASES = ["Scope", "Initial assessment", "Safety checks", "Assessment", "Outcome"];
@@ -216,7 +223,7 @@
   const RELATED_GUIDELINES = [
     "Ectopic pregnancy: Ectopic Pregnancy Management – Guideline",
     "Missed, incomplete or complete miscarriage: Miscarriage: Management – Guideline",
-    "Anti-D: Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline (Appendix C)"
+    "Anti-D: " + antiDLink("Anti-D (RhD) Immunoglobulin Use in Maternity Patients – Guideline") + " (Appendix C)"
   ];
 
   // ---- state machine ----------------------------------------------------------

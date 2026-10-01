@@ -14,6 +14,13 @@
   const backBtn = document.getElementById("backBtn");
   const restartBtn = document.getElementById("restartBtn");
 
+  // Link to the sibling RhD Immunoglobulin (Anti-D) guideline. Opens in a new tab
+  // so the clinician's place in this pathway (held in memory only) isn't lost.
+  const ANTI_D_HREF = "../rhd-immunoglobulin/index.html";
+  function antiDLink(text) {
+    return `<a href="${ANTI_D_HREF}" target="_blank" rel="noopener">${text}</a>`;
+  }
+
   // ---- shared content blocks -------------------------------------------------
 
   const PHASES = ["Gestation", "Safety check", "Classification", "Details", "Preferences", "Result"];
@@ -26,7 +33,7 @@
   ];
 
   const UNIVERSAL_CHECKLIST = [
-    "Check Rh(D) status — give Anti-D if indicated (see Anti-D (RhD) Immunoglobulin Use in Maternity Patients guideline)",
+    "Check Rh(D) status — give Anti-D if indicated (see " + antiDLink("Anti-D (RhD) Immunoglobulin Use in Maternity Patients guideline") + ")",
     "Discuss contraception and future pregnancy plans",
     "Send passed pregnancy tissue for histopathology where applicable",
     "Provide EPAS / after-hours emergency contact details and a clear plan for emergency care",
@@ -60,7 +67,7 @@
       regimen: [
         "Prescribe take-home analgesia and anti-emetics (e.g. metoclopramide, NSAIDs, paracetamol ± codeine) based on patient needs and allergies",
         "Allow to eat and drink as normal",
-        "Anti-D as indicated"
+        antiDLink("Anti-D") + " as indicated"
       ],
       followUp: [
         "Review at 1 week (face-to-face or telephone) and again at 2 weeks",
@@ -101,13 +108,13 @@
         "Then Misoprostol 800 mcg (2 × 400 mcg) buccal 24–48 hours later",
         "Then a further Misoprostol 400 mcg (2 × 200 mcg) buccal 4 hours after that",
         "Take analgesia/anti-emetic 30 minutes before the first misoprostol dose",
-        "Anti-D as indicated"
+        antiDLink("Anti-D") + " as indicated"
       ],
       regimenIncomplete: [
         "Misoprostol 800 mcg (4 × 200 mcg) buccal",
         "Followed by a repeat dose of 400 mcg (2 × 200 mcg) buccal 4 hours later, as prescribed",
         "Take analgesia/anti-emetic 30 minutes before the first misoprostol dose",
-        "Anti-D as indicated"
+        antiDLink("Anti-D") + " as indicated"
       ],
       followUp: [
         "Ensure the woman knows how to seek urgent advice for side effects or allergic reaction",
@@ -141,7 +148,7 @@
         "Test for chlamydia and bacterial vaginosis if symptomatic (unless recently done); self-collect acceptable",
         "Consider cervical priming: misoprostol 400 mcg (2 × 200 mcg) PV or buccal ~90 minutes pre-op",
         "Discuss contraception — LARC (IUCD/Implanon) can be inserted at time of procedure if desired",
-        "Anti-D as indicated",
+        antiDLink("Anti-D") + " as indicated",
         "Single dose paracetamol 1 g + ibuprofen 400 mg orally may be given with the misoprostol"
       ],
       followUp: [
@@ -436,7 +443,7 @@
     app.appendChild(actionPanel("info", "Admission required", [
       "Admit under Acute Gynaecology after discussion with the consultant on call ± obstetrics liaison.",
       "EPAS registrar/resident to make the admission booking.",
-      "Anti-D as indicated.",
+      antiDLink("Anti-D") + " as indicated.",
       "Provide a medical certificate as required."
     ]));
 
