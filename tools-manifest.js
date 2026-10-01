@@ -51,6 +51,17 @@ window.TOOLS = [
     department: "Maternity Services",
     status: "live", // "live" | "draft" | "planned"
     path: "rhd-immunoglobulin/"
+  },
+  {
+    slug: "nausea-vomiting-pregnancy",
+    title: "Nausea and Vomiting in Pregnancy",
+    description: "Assessment, rehydration, the stepwise antiemetic ladder and the home-care pathway for nausea and vomiting of pregnancy and hyperemesis gravidarum.",
+    guidelineTitle: "Nausea and Vomiting in Pregnancy – Guideline",
+    guidelineRef: "RWH0191867 v3.0",
+    lastUpdated: "02/09/2024",
+    department: "Maternity Services",
+    status: "live", // "live" | "draft" | "planned"
+    path: "nausea-vomiting-pregnancy/"
   }
 
   // Example entry for the next tool:

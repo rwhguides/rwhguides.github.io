@@ -1,4 +1,4 @@
-# RWH Clinical Guidelines: Project Context & Build Guide
+# Australian Guidelines in ObGyn: Project Context & Build Guide
 
 > **For Claude:** This is the full context for this project. Read all of it before
 > building or changing a tool. It covers what the project is, how it got here,
@@ -12,7 +12,7 @@
 
 ## 1. What this project is
 
-**RWH Clinical Guidelines** is a personal project by a clinician (Dr Gabriel
+**Australian Guidelines in ObGyn** (formerly "RWH Clinical Guidelines") is a personal project by a clinician (Dr Gabriel
 Jones). It turns Royal Women's Hospital (RWH, "The Women's", Melbourne)
 clinical guidelines into **interactive, step-by-step, point-of-care
 decision-support tools**. Each tool:
@@ -161,13 +161,77 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
    - Afterwards (owner approved): every "Anti-D" mention in the three
      early-pregnancy tools now links to this guideline via `antiDLink()`. This
      added a site-wide in-content link style in `shared.css` (see §5).
+10. **CTG guideline built, then withdrawn (01/10/2026).** A tool was built
+    locally from *Cardiotocograph (CTG) Interpretation and Response – Guideline*
+    (RWH0192241 v2.1, last review 13/11/2023, owner Trish Ryan). It was a feature
+    classifier: the clinician entered baseline, variability, decelerations and
+    accelerations, and it gave the Appendix A category, the Appendix E escalation
+    tier and the response steps, plus an Appendix C "is CTG indicated?" checker.
+    After review, **the owner judged it unreliable and asked for it to be removed
+    entirely.** The folder and manifest entry were deleted before any commit, so it
+    was never published or in git history. The owner didn't give a specific reason.
+    Known facts about the source, recorded for context (not as the owner's reason):
+    - Appendices A (algorithm), B (definitions) and E (escalation pathway) **disagree**
+      on several features. Examples: reduced variability 3–5 bpm (B: "unlikely"; A:
+      "may" if >40 min); prolonged deceleration (A/B: "may"; E: immediate Pink Alert);
+      baseline >170 (A: "likely"; E: lowest escalation tier as ">160"); typical
+      variable decelerations and absent accelerations ("unlikely" in A/B but escalated
+      in E). The build reconciled these by taking the more urgent source. That
+      reconciliation was the tool's own interpretation, not the guideline's.
+    - The guideline was last reviewed in 2023, and the Appendix A/E content is images.
+    - The source PDF stays in `guidelines/` (owner's file, kept local).
+11. **Rebranded away from RWH (01/10/2026), at the owner's request,** so the site
+    doesn't look directly associated with RWH:
+    - Site name: "RWH Clinical Guidelines" → **"Australian Guidelines in ObGyn"**
+      (homepage `<title>`/`<h1>`, every tab title suffix `— Australian Guidelines in
+      ObGyn`).
+    - Subtitle: **"Interactive, step-by-step tools for obstetrics and gynaecology,
+      based on Australian clinical guidelines"**.
+    - **The pink header circle (`.brand-dot`) was removed everywhere**, because it
+      mimicked the RWH logo. The CSS rule is deleted, and it's gone from `_template/` too.
+    - Back-link: "← All RWH guideline tools" → **"← All guidelines"**.
+    - Homepage disclaimer: "not endorsed by or affiliated with The Royal Women's
+      Hospital or any other health service".
+    - **Kept on purpose:** each page's citation of its source RWH guideline (title,
+      doc number, version, review date, owner) and the non-affiliation statements.
+      Those are attribution, not branding.
+    - Not changed (owner not yet asked): the pink colour palette, the GitHub
+      account/repo name `rwhguides` (it's in the URL), and the RWH document numbers
+      shown on homepage cards.
+12. **Fifth tool built and published (01/10/2026):** `nausea-vomiting-pregnancy/`, from
+    *Nausea and Vomiting in Pregnancy – Guideline* (RWH0191867 v3.0, last review
+    02/09/2024, owner Jenny Ryan, Maternity Services). This was the first guideline
+    checked under the "contradictions before building" rule (§4 Process). The body
+    text and the Appendix A algorithm disagreed, and **the owner chose the source for
+    each conflict, one by one**:
+    - Pyridoxine: **Appendix A** (12.5 mg morning and midday, 25 mg night), keeping
+      the body note "use of pyridoxine is optional".
+    - Ranitidine 300 mg daily with prednisolone: **included** (Appendix A only). Claude
+      flagged that ranitidine was, to its knowledge, withdrawn in Australia around 2020.
+      The owner kept it.
+    - Prochlorperazine parenteral: **body text** (12.5 mg IM/slow IV every 8 h).
+    - Corticosteroids: **body text** (after the first trimester, benefit > fetal risk),
+      with "after the first trimester" = **from 14+0 weeks** (owner decision).
+    - Home pathway: **Appendix A** ("RWH @ Home Acute Shared Care", Medicare eligible
+      **and** easy to cannulate, refer back to PDCC/WEC). The intake line and EMR order
+      keep their literal body-text names ("RMH@Home Acute …").
+    - Prednisolone taper: the owner chose to **interpret** the ambiguous wording as "50 mg
+      daily ×3 days, then 25 mg daily ×3 days, then reduce by 5 mg as tolerated".
+    - All six choices are shown on the page in a **"Source notes"** reference card,
+      and the disclaimer bar points to it.
+    - Shape: an escalation ladder. Gestation → differentials and investigations →
+      previous severe NVP (pre-emptive banner; no regimen given) → dehydrated
+      (admit) → "which step tried?" → next step, the full ladder with
+      Tried/Next/"From 14+0 weeks" badges, lifestyle, home pathway, and the patient
+      sheet *Nausea, vomiting and hyperemesis in pregnancy* (PDF, July 2026).
 
 ### Current status (01/10/2026)
 
-- Four live tools: `miscarriage-management/`,
+- Five live tools: `miscarriage-management/`,
   `pain-bleeding-early-pregnancy/`, `ectopic-pregnancy-management/` (the EPAS
-  early-pregnancy set, which link to each other with relative links) and
-  `rhd-immunoglobulin/` (Maternity).
+  early-pregnancy set, which link to each other with relative links),
+  `rhd-immunoglobulin/` and `nausea-vomiting-pregnancy/` (Maternity).
+- Withdrawn and never published: the CTG Interpretation and Response tool (§2, item 10).
 - No further PDFs are waiting in `guidelines/`.
 - **Published on GitHub Pages (01/10/2026)** at **https://rwhguides.github.io/**
   from the public repo `rwhguides/rwhguides.github.io` (`main` branch, root).
@@ -228,8 +292,8 @@ Architectural decisions (keep to these unless the owner asks otherwise):
 - **Cache-busting query strings:** `app.js?v=N`, `shared.css?v=N`. Bump `N`
   when you change a file, so browsers (and the owner testing locally) don't
   serve stale copies. Current versions: pain-bleeding `app.js?v=4`, ectopic `app.js?v=3`, RhD `app.js?v=1`,
-  miscarriage `app.js?v=6`, homepage `tools-manifest.js?v=6`, and
-  `shared.css?v=2` on every page (bump it on **all** `index.html` files, including
+  NVP `app.js?v=1`, miscarriage `app.js?v=6`, homepage `tools-manifest.js?v=7`, and
+  `shared.css?v=3` on every page (bump it on **all** `index.html` files, including
   `_template/`, whenever `shared.css` changes). **Bump the
   homepage's `tools-manifest.js?v=` whenever you edit the manifest.**
 - **Folder name = URL slug** = manifest `slug`/`path`, in kebab-case (e.g.
@@ -288,9 +352,12 @@ Architectural decisions (keep to these unless the owner asks otherwise):
   `--bad-*`, `--info-*`, `--neutral-*`, `--pink-*`). Don't hard-code colours
   in tool files. Any palette change goes in `shared.css` and applies
   everywhere. Make it everywhere, not just in the header.
-- Brand accent is RWH-style pink (`--pink: #d6006d`), used sparingly for small
-  accents (dot, active crumb, checkbox accent). Panels and buttons use the
+- Brand accent is pink (`--pink: #d6006d`), used sparingly for small accents
+  (active crumb, checkbox accent, link hover). Panels and buttons use the
   pale/mid pinks.
+- **Don't mimic RWH branding** (no logo-like marks, no "RWH" in the site name
+  or tab titles). Cite the source guideline in each page's subtitle and footer, and
+  keep the non-affiliation disclaimer. Site name: **"Australian Guidelines in ObGyn"**.
 
 ### Process
 - **Test locally first**, then go to GitHub.
@@ -298,13 +365,19 @@ Architectural decisions (keep to these unless the owner asks otherwise):
   case answer only and don't edit.
 - Show the owner the result in the browser (`open http://localhost:PORT/...`)
   after significant changes.
+- **Do not rebuild the CTG Interpretation and Response guideline** (or any CTG
+  trace-classification tool) unless the owner explicitly asks. It was withdrawn as
+  unreliable (§2, item 10). If a future guideline's appendices or tables contradict each
+  other on classification or escalation, raise it with the owner **before building**,
+  and treat it as a possible reason not to build that tool at all, rather than
+  reconciling it in code.
 
 ---
 
 ## 5. How a tool works (the engine)
 
 Each tool's `index.html` is a fixed shell: a header (with the
-`← All RWH guideline tools` back-link to `../index.html`), a disclaimer bar, a
+`← All guidelines` back-link to `../index.html`), a disclaimer bar, a
 `#breadcrumb` nav, a `#app` card, Back/Restart buttons, and a citation footer.
 `app.js` is one IIFE that renders screens into `#app`.
 

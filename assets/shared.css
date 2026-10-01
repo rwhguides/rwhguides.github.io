@@ -1,5 +1,5 @@
 /* ============================================================================
-   Shared design system for RWH Clinical Guidelines tools.
+   Shared design system for Australian Guidelines in ObGyn.
    Used by the homepage and every guideline tool (via ../assets/shared.css).
    Change tokens here and every tool updates together.
    ============================================================================ */
@@ -76,12 +76,6 @@ body {
 .app-shell .card a:not(.patient-info-link) { color: var(--pink-dark); text-decoration: underline; text-underline-offset: 2px; }
 .app-shell .card a:not(.patient-info-link):hover { color: var(--pink); }
 .brand { display: flex; align-items: center; gap: 0.75rem; }
-.brand-dot {
-  flex: none;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--pink);
-  box-shadow: 0 0 0 4px rgba(214, 0, 109, 0.15);
-}
 .brand h1 { font-size: 1.25rem; margin: 0; color: var(--pink-dark); }
 .subtitle { margin: 0.15rem 0 0; font-size: 0.82rem; color: var(--ink-soft); opacity: 0.92; }
 
