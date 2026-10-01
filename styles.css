@@ -1,0 +1,27 @@
+/* Homepage-only styles — layered on top of assets/shared.css */
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.tool-card {
+  display: block;
+  min-height: 0;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, transform 0.05s;
+}
+a.tool-card:hover { border-color: var(--pink-mid); transform: translateY(-1px); }
+.tool-card.disabled { opacity: 0.6; cursor: default; }
+
+.tool-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.tool-card h2 { font-size: 1.05rem; margin: 0; color: var(--ink); }
+
+.tool-desc { color: var(--ink-soft); font-size: 0.9rem; margin: 0.5rem 0; }
+.tool-meta { color: var(--ink-soft); font-size: 0.78rem; margin: 0.6rem 0 0; line-height: 1.5; }
+
+.tool-status-live { background: var(--ok-border); color: var(--ok-text); }
+.tool-status-draft { background: var(--warn-border); color: var(--warn-text); }
+.tool-status-planned { background: var(--neutral-border); color: var(--neutral-text); }

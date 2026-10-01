@@ -1,0 +1,17 @@
+I want to build a new guideline tool in the RWH Clinical Guidelines project
+at /Users/gjones/Dropbox/RWH/Tools.
+
+1. First read /Users/gjones/Dropbox/RWH/Tools/PROJECT_CONTEXT.md in full. It has
+   the project's history, goals, my standing preferences, the code
+   architecture and the step-by-step build process. Follow it.
+2. The new guideline PDF is at: /Users/gjones/Dropbox/RWH/Tools/guidelines/Pain and Bleeding in Early Pregnancy - Guideline.pdf
+   Tool slug / folder name: [kebab-case-slug, e.g. postpartum-haemorrhage]
+3. Read the whole PDF, then give me a short outline of the proposed flow
+   (scope gate, safety checks, branches, thresholds, management options,
+   patient information sheets) and list any interpretation decisions,
+   before you write any code.
+4. Once I approve the outline, build the tool from _template/, add it to
+   tools-manifest.js, and test it locally (every branch, phone width,
+   print view). Then open it in the browser for me to review.
+
+Any extra notes for this guideline: [OPTIONAL]

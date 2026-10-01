@@ -1,0 +1,8 @@
+/* Tool-specific style overrides go here, on top of ../assets/shared.css.
+   Most tools won't need anything in this file — the shared design system
+   (header, cards, option buttons, checkboxes, banners, action panels,
+   modality cards, badges, etc.) already covers the step-wizard pattern.
+
+   Example override:
+   .screen-title { font-size: 1.4rem; }
+*/
