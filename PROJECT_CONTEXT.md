@@ -224,15 +224,51 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
       (admit) → "which step tried?" → next step, the full ladder with
       Tried/Next/"From 14+0 weeks" badges, lifestyle, home pathway, and the patient
       sheet *Nausea, vomiting and hyperemesis in pregnancy* (PDF, July 2026).
+13. **Sixth tool built and published (06/10/2026):** `vte-prophylaxis/`, from
+    *Venous Thromboembolism (VTE) Prophylaxis Guideline* (RWH0191933 v2.0, last
+    review 22/10/2024, owner Alison Smith, Allied Health and Clinical Support
+    Services / Laboratory Services). Inconsistencies were raised before building, and
+    the owner resolved them:
+    - The Appendix A page is footed **"Page 8 of 7"**. The owner confirmed it's a
+      **footer error**, so no page is missing.
+    - **Exemption age ≤35** (the guideline says <35). The risk factor stays >35, so there
+      is no gap at 35.
+    - **Obesity risk factor = BMI ≥30** for all groups (Appendix A says >30, §4.3 says
+      ≥30). BMI exactly 30 means not exempt.
+    - **Exemption** (§4.1, midwifery-led) applies only if there are no other Appendix A
+      factors. Antenatal "hospital admission" isn't counted for the exemption, but
+      otherwise it makes her intermediate risk.
+    - **Transient antenatal factors** (dehydration/hyperemesis, infection incl.
+      COVID+ve to day 7, travel ≥4 h) count towards "four or more".
+    - **Gynaecology non-surgical: one §4.3 factor = high risk** → inpatient prophylaxis.
+    - **CrCl ≤30 or any dose change → "seek expert opinion from Obstetric Medicine"**
+      (owner's wording; the guideline says "consult haematologist if required" and
+      gives no reduced dose).
+    - Claude's own calls, flagged and accepted on go-live: weight ≤120 kg → 40 mg / 5000
+      units, >120 kg → 60 mg / 7500 units; gynaecology/OHSS doses use **current**
+      weight (entered on the plan screen); obstetric doses use booking weight.
+    - Shape: patient group → (obstetric) details, from which BMI, age, parity, smoker,
+      elective CS and operative delivery are counted automatically → Appendix A
+      risk-factor checklist → LMWH contraindications → mechanical contraindications
+      (when needed) → plan. All rules are in `computePlan()`; every interpretation is
+      shown in a "Source notes" card.
+    - Patient sheets: *VTE: blood clots and how to prevent them* (June 2026), always;
+      *VTE: how to prevent a blood clot using LMWH* (Feb 2026), when LMWH is
+      recommended.
+    - Claude flagged, from outside knowledge, that the antenatal/postnatal thresholds
+      differ from the RCOG Green-top 37a the guideline cites (possibly a local choice).
+      Nothing was changed because of it.
 
-### Current status (01/10/2026)
+### Current status (06/10/2026)
 
-- Five live tools: `miscarriage-management/`,
+- Six live tools: `miscarriage-management/`,
   `pain-bleeding-early-pregnancy/`, `ectopic-pregnancy-management/` (the EPAS
   early-pregnancy set, which link to each other with relative links),
-  `rhd-immunoglobulin/` and `nausea-vomiting-pregnancy/` (Maternity).
+  `rhd-immunoglobulin/`, `nausea-vomiting-pregnancy/` (Maternity) and
+  `vte-prophylaxis/` (Laboratory Services).
 - Withdrawn and never published: the CTG Interpretation and Response tool (§2, item 10).
-- No further PDFs are waiting in `guidelines/`.
+- Waiting in `guidelines/`: *Hypertension – Management of Acute – Guideline* (not yet
+  started).
 - **Published on GitHub Pages (01/10/2026)** at **https://rwhguides.github.io/**
   from the public repo `rwhguides/rwhguides.github.io` (`main` branch, root).
   See §8.
@@ -292,7 +328,8 @@ Architectural decisions (keep to these unless the owner asks otherwise):
 - **Cache-busting query strings:** `app.js?v=N`, `shared.css?v=N`. Bump `N`
   when you change a file, so browsers (and the owner testing locally) don't
   serve stale copies. Current versions: pain-bleeding `app.js?v=4`, ectopic `app.js?v=3`, RhD `app.js?v=1`,
-  NVP `app.js?v=1`, miscarriage `app.js?v=6`, homepage `tools-manifest.js?v=7`, and
+  NVP `app.js?v=1`, VTE `app.js?v=1`, miscarriage `app.js?v=6`, homepage
+  `tools-manifest.js?v=9`, and
   `shared.css?v=3` on every page (bump it on **all** `index.html` files, including
   `_template/`, whenever `shared.css` changes). **Bump the
   homepage's `tools-manifest.js?v=` whenever you edit the manifest.**

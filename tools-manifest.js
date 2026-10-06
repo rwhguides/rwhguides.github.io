@@ -62,6 +62,17 @@ window.TOOLS = [
     department: "Maternity Services",
     status: "live", // "live" | "draft" | "planned"
     path: "nausea-vomiting-pregnancy/"
+  },
+  {
+    slug: "vte-prophylaxis",
+    title: "VTE Prophylaxis",
+    description: "Antenatal, postnatal and gynaecology/oncology VTE risk assessment, with LMWH dose, mechanical prophylaxis, contraindications and regional anaesthesia timing.",
+    guidelineTitle: "Venous Thromboembolism (VTE) Prophylaxis Guideline",
+    guidelineRef: "RWH0191933 v2.0",
+    lastUpdated: "22/10/2024",
+    department: "Laboratory Services",
+    status: "live", // "live" | "draft" | "planned"
+    path: "vte-prophylaxis/"
   }
 
   // Example entry for the next tool:

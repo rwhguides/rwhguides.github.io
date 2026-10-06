@@ -23,6 +23,7 @@ pain-bleeding-early-pregnancy/  RWH "Pain and Bleeding in Early Pregnancy" guide
 ectopic-pregnancy-management/   RWH "Ectopic Pregnancy Management" guideline
 rhd-immunoglobulin/             RWH "RhD Immunoglobulin (Anti D) Use in Maternity" guideline
 nausea-vomiting-pregnancy/      RWH "Nausea and Vomiting in Pregnancy" guideline
+vte-prophylaxis/                RWH "Venous Thromboembolism (VTE) Prophylaxis" guideline
   index.html
   app.js
 
