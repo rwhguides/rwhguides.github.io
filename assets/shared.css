@@ -73,8 +73,8 @@ body {
 .back-link:hover { opacity: 1; text-decoration: underline; }
 
 /* In-content links (e.g. links to sibling guidelines) — brand pink, not browser blue */
-.app-shell .card a:not(.patient-info-link) { color: var(--pink-dark); text-decoration: underline; text-underline-offset: 2px; }
-.app-shell .card a:not(.patient-info-link):hover { color: var(--pink); }
+.app-shell .card a:not(.patient-info-link), .site-footer a { color: var(--pink-dark); text-decoration: underline; text-underline-offset: 2px; }
+.app-shell .card a:not(.patient-info-link):hover, .site-footer a:hover { color: var(--pink); }
 .brand { display: flex; align-items: center; gap: 0.75rem; }
 .brand h1 { font-size: 1.25rem; margin: 0; color: var(--pink-dark); }
 .subtitle { margin: 0.15rem 0 0; font-size: 0.82rem; color: var(--ink-soft); opacity: 0.92; }

@@ -25,7 +25,8 @@ decision-support tools**. Each tool:
   to the matching patient information sheets.
 
 Everything is a **static website** (plain HTML, CSS and JavaScript, with no build step,
-framework, dependencies, backend, analytics or cookies), hosted on
+framework, dependencies, backend or cookies; the only third-party script is
+cookie-free GoatCounter page-view counting, see §7), hosted on
 **GitHub Pages**. One repo holds one Pages site. The **homepage is a hub** that lists
 every tool, and each tool lives in its own subfolder.
 
@@ -330,7 +331,7 @@ Architectural decisions (keep to these unless the owner asks otherwise):
   serve stale copies. Current versions: pain-bleeding `app.js?v=4`, ectopic `app.js?v=3`, RhD `app.js?v=1`,
   NVP `app.js?v=1`, VTE `app.js?v=1`, miscarriage `app.js?v=6`, homepage
   `tools-manifest.js?v=9`, and
-  `shared.css?v=3` on every page (bump it on **all** `index.html` files, including
+  `shared.css?v=4` on every page (bump it on **all** `index.html` files, including
   `_template/`, whenever `shared.css` changes). **Bump the
   homepage's `tools-manifest.js?v=` whenever you edit the manifest.**
 - **Folder name = URL slug** = manifest `slug`/`path`, in kebab-case (e.g.
@@ -728,8 +729,19 @@ before marking it `live` or publishing.
   Hospital; validate against the current guideline before clinical use;
   re-check whenever the source document is updated.*
 - **No patient data is collected, stored or sent.** All state is in memory
-  and lost on refresh. Keep it that way: no localStorage of answers, no
-  analytics, no external scripts.
+  and lost on refresh. Keep it that way: no localStorage of answers, and no
+  clinical content in URLs (no query strings or hashes carrying answers).
+- **Analytics (owner decision, 12/10/2026): GoatCounter page views only.**
+  Every page (including `_template/`) loads, just before `</body>`:
+  `<script data-goatcounter="https://rwhguides.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>`
+  (`https://`, not `//`, so `file://` testing doesn't break). GoatCounter is
+  cookie-free and doesn't store IPs; it records path, title, referrer and screen
+  size. Its script skips `localhost`, so local testing doesn't count. Every footer
+  carries the privacy line "Anonymous page-view counts are collected with
+  GoatCounter…". **Don't add** event/click/form tracking, `count()` calls with
+  custom paths, Google Analytics, or any other third-party script without the
+  owner's explicit approval. Dashboard: https://rwhguides.goatcounter.com (the
+  owner's account).
 - When a source guideline is revised, update the tool's content, citation,
   footer, manifest `guidelineRef`/`lastUpdated`, and bump the `?v=` cache-busters.
 
