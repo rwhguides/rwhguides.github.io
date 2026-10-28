@@ -24,6 +24,7 @@ ectopic-pregnancy-management/   RWH "Ectopic Pregnancy Management" guideline
 rhd-immunoglobulin/             RWH "RhD Immunoglobulin (Anti D) Use in Maternity" guideline
 nausea-vomiting-pregnancy/      RWH "Nausea and Vomiting in Pregnancy" guideline
 vte-prophylaxis/                RWH "Venous Thromboembolism (VTE) Prophylaxis" guideline
+labour-pain-options/            RWH "Pain Management: Options for Labour" guideline
   index.html
   app.js
 

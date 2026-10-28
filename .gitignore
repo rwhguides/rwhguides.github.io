@@ -3,3 +3,6 @@
 
 # Source guideline PDFs (RWH copyright) are kept local only, not published
 *.pdf
+
+# Local editor settings
+.vscode/

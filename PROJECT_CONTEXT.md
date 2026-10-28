@@ -259,14 +259,38 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
     - Claude flagged, from outside knowledge, that the antenatal/postnatal thresholds
       differ from the RCOG Green-top 37a the guideline cites (possibly a local choice).
       Nothing was changed because of it.
+14. **Seventh tool built and published (29/10/2026):** `labour-pain-options/`, from
+    *Pain Management: Options for Labour – Guideline* (RWH0192696 v2.2, last review
+    02/04/2025, owner Sophie Cameron, Maternity Services). It's an **options catalogue**:
+    current situation (epidural in situ / in water / fetal scalp electrode) → choose an
+    option (non-pharmacological, N₂O/O₂, IM morphine SO/14, epidural, IV PCA) → that
+    option's contraindication checks → dose / procedure / observations / documentation.
+    Contradictions were raised first, and the owner decided:
+    - Morphine peak effect: **show both** (~70 min in §4.2.2; 30–60 min in App A).
+    - Morphine needs a **diagnosis of labour in every setting**. Outside the Birth
+      Centre / Assessment Centre, the rules about term, early labour and a doctor's
+      order (SO/14 not applicable) apply as well.
+    - Further dose for women **<50 kg** (7.5 mg first dose): not stated → **"medical
+      order required"**, within 15 mg / 12 h and no earlier than 4 h.
+    - SO/14 "inclusion criteria" (never listed) = the guideline's own sentence: healthy,
+      term, in labour, not considering regional analgesia; otherwise a medical order.
+    - "Birth imminent" (undefined) is asked as a clinical-judgement question; yes →
+      don't give.
+    - N₂O timing: **show both** (20–30 s / max ~45 s, and "time lag ~50 s").
+    - The falls-risk sentence that was merged into the §4.1.4 heading is shown with
+      positioning/movement.
+    - Patient info: *Managing pain in labour* (web page), *Epidural pain relief for
+      labour* (May 2025), *The use of water in labour and birth* (Dec 2024), *Tips for
+      the labour and birth support person* (Aug 2024).
+    - `.vscode/` (the owner's editor settings) was added to `.gitignore`.
 
-### Current status (06/10/2026)
+### Current status (29/10/2026)
 
-- Six live tools: `miscarriage-management/`,
+- Seven live tools: `miscarriage-management/`,
   `pain-bleeding-early-pregnancy/`, `ectopic-pregnancy-management/` (the EPAS
   early-pregnancy set, which link to each other with relative links),
-  `rhd-immunoglobulin/`, `nausea-vomiting-pregnancy/` (Maternity) and
-  `vte-prophylaxis/` (Laboratory Services).
+  `rhd-immunoglobulin/`, `nausea-vomiting-pregnancy/`, `labour-pain-options/`
+  (Maternity) and `vte-prophylaxis/` (Laboratory Services).
 - Withdrawn and never published: the CTG Interpretation and Response tool (§2, item 10).
 - Waiting in `guidelines/`: *Hypertension – Management of Acute – Guideline* (not yet
   started).
@@ -287,7 +311,7 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
 Tools/                          ← repo root = GitHub Pages site root
 ├── PROJECT_CONTEXT.md          ← this file
 ├── README.md                   ← human-facing overview + deploy steps
-├── .gitignore                  ← .DS_Store, .claude/, *.pdf
+├── .gitignore                  ← .DS_Store, .claude/, *.pdf, .vscode/
 ├── .nojekyll                   ← tells Pages to serve files as-is (no Jekyll processing)
 ├── index.html                  ← hub homepage
 ├── styles.css                  ← homepage-only styles (tool grid/cards/status badges)
@@ -329,8 +353,8 @@ Architectural decisions (keep to these unless the owner asks otherwise):
 - **Cache-busting query strings:** `app.js?v=N`, `shared.css?v=N`. Bump `N`
   when you change a file, so browsers (and the owner testing locally) don't
   serve stale copies. Current versions: pain-bleeding `app.js?v=4`, ectopic `app.js?v=3`, RhD `app.js?v=1`,
-  NVP `app.js?v=1`, VTE `app.js?v=1`, miscarriage `app.js?v=6`, homepage
-  `tools-manifest.js?v=9`, and
+  NVP `app.js?v=1`, VTE `app.js?v=1`, labour pain `app.js?v=1`, miscarriage
+  `app.js?v=6`, homepage `tools-manifest.js?v=11`, and
   `shared.css?v=4` on every page (bump it on **all** `index.html` files, including
   `_template/`, whenever `shared.css` changes). **Bump the
   homepage's `tools-manifest.js?v=` whenever you edit the manifest.**

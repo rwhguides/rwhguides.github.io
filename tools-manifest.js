@@ -73,6 +73,17 @@ window.TOOLS = [
     department: "Laboratory Services",
     status: "live", // "live" | "draft" | "planned"
     path: "vte-prophylaxis/"
+  },
+  {
+    slug: "labour-pain-options",
+    title: "Labour Pain Options",
+    description: "Non-pharmacological and pharmacological labour analgesia: contraindications, nitrous oxide, IM morphine (SO/14), epidural and IV PCA, with dosing, procedure and observations.",
+    guidelineTitle: "Pain Management: Options for Labour – Guideline",
+    guidelineRef: "RWH0192696 v2.2",
+    lastUpdated: "02/04/2025",
+    department: "Maternity Services",
+    status: "live", // "live" | "draft" | "planned"
+    path: "labour-pain-options/"
   }
 
   // Example entry for the next tool:
