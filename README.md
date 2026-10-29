@@ -25,6 +25,7 @@ rhd-immunoglobulin/             RWH "RhD Immunoglobulin (Anti D) Use in Maternit
 nausea-vomiting-pregnancy/      RWH "Nausea and Vomiting in Pregnancy" guideline
 vte-prophylaxis/                RWH "Venous Thromboembolism (VTE) Prophylaxis" guideline
 labour-pain-options/            RWH "Pain Management: Options for Labour" guideline
+safe-timing-of-birth/           RWH "Safe Timing of Birth" guideline
   index.html
   app.js
 

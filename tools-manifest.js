@@ -84,6 +84,17 @@ window.TOOLS = [
     department: "Maternity Services",
     status: "live", // "live" | "draft" | "planned"
     path: "labour-pain-options/"
+  },
+  {
+    slug: "safe-timing-of-birth",
+    title: "Safe Timing of Birth",
+    description: "Recommended gestation for planned birth by condition, with the earliest applicable window and a check of a proposed gestation.",
+    guidelineTitle: "Safe Timing of Birth – Guideline",
+    guidelineRef: "RWH0211246 v2.0",
+    lastUpdated: "02/02/2026",
+    department: "Maternity Services",
+    status: "live", // "live" | "draft" | "planned"
+    path: "safe-timing-of-birth/"
   }
 
   // Example entry for the next tool:

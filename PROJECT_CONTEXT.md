@@ -283,14 +283,37 @@ Built in Claude Code sessions on 30/09/2026 to 01/10/2026.
       labour* (May 2025), *The use of water in labour and birth* (Dec 2024), *Tips for
       the labour and birth support person* (Aug 2024).
     - `.vscode/` (the owner's editor settings) was added to `.gitignore`.
+15. **Eighth tool built and published (29/10/2026):** `safe-timing-of-birth/`, from
+    *Safe Timing of Birth – Guideline* (RWH0211246 v2.0, last review 02/02/2026, owner
+    Sophie Cameron, Maternity Services). It's a **condition lookup**: tick conditions
+    from the §4 table (21 rows, all in the `CONDITIONS` data block) → choose each
+    condition's sub-row → optional proposed gestation → result. The result shows
+    birth-indicated rows first, then individualised/MFM rows, the earliest
+    recommended window, conditions that set no earlier window, the proposed-gestation
+    check, and a card per condition. Owner decisions on the table's ambiguities:
+    - **Several conditions:** list all, sorted earliest first, and **highlight the
+      earliest window**. The guideline gives no combining rule, so the page says so.
+    - **Bile acids exactly 100 → severe (≥100)**, matching the guideline's own note.
+    - **PPROM with compromise → "birth indicated, including before 34+0"** (the
+      table's "<34+0 weeks" was unclear).
+    - Boundaries: titre **1:32 → MFM decision**; GDM insulin **100 u/day → 38+0–39+0**;
+      **BMI ≥40 → offer 39–40, ≥50 → recommend 38–39**.
+    - The optional **proposed-gestation check** (owner approved) flags only "earlier
+      than window" or "later than a no-later-than limit"; range upper ends aren't used.
+      With no condition ticked, a proposed gestation <39+0 is flagged (no listed
+      indication).
+    - Claude's layout readings, flagged and accepted on go-live: caesarean row
+      (classical → 38, ≥3 CS → 39); pre-eclampsia row (severe → individualised;
+      asymptomatic → 37+0–38+0).
+    - Patient info: *Induction of labour* and *Caesarean birth* web pages.
 
 ### Current status (29/10/2026)
 
-- Seven live tools: `miscarriage-management/`,
+- Eight live tools: `miscarriage-management/`,
   `pain-bleeding-early-pregnancy/`, `ectopic-pregnancy-management/` (the EPAS
   early-pregnancy set, which link to each other with relative links),
-  `rhd-immunoglobulin/`, `nausea-vomiting-pregnancy/`, `labour-pain-options/`
-  (Maternity) and `vte-prophylaxis/` (Laboratory Services).
+  `rhd-immunoglobulin/`, `nausea-vomiting-pregnancy/`, `labour-pain-options/`,
+  `safe-timing-of-birth/` (Maternity) and `vte-prophylaxis/` (Laboratory Services).
 - Withdrawn and never published: the CTG Interpretation and Response tool (§2, item 10).
 - Waiting in `guidelines/`: *Hypertension – Management of Acute – Guideline* (not yet
   started).
@@ -353,8 +376,8 @@ Architectural decisions (keep to these unless the owner asks otherwise):
 - **Cache-busting query strings:** `app.js?v=N`, `shared.css?v=N`. Bump `N`
   when you change a file, so browsers (and the owner testing locally) don't
   serve stale copies. Current versions: pain-bleeding `app.js?v=4`, ectopic `app.js?v=3`, RhD `app.js?v=1`,
-  NVP `app.js?v=1`, VTE `app.js?v=1`, labour pain `app.js?v=1`, miscarriage
-  `app.js?v=6`, homepage `tools-manifest.js?v=11`, and
+  NVP `app.js?v=1`, VTE `app.js?v=1`, labour pain `app.js?v=1`, safe timing `app.js?v=1`,
+  miscarriage `app.js?v=6`, homepage `tools-manifest.js?v=13`, and
   `shared.css?v=4` on every page (bump it on **all** `index.html` files, including
   `_template/`, whenever `shared.css` changes). **Bump the
   homepage's `tools-manifest.js?v=` whenever you edit the manifest.**
